@@ -2,10 +2,6 @@
 by MA Remote April 2017 cohort of 5
 Sandy Cochrane, Cristina Iannone, Sophie Mann, Paula Muldoon, Simon Tanner
 
-
-
-### About
-
 ---
 
 ## Run locally
@@ -14,13 +10,22 @@ View the repository [here](https://github.com/pmuldoon86/machine-learning) on Gi
 Clone the repo. Then:
 
 ```bash
+python manage.py runserver
 
 ```
-#### To run the tests
+
+## To run the tests
 ```bash
+Feature tests:
+(from machine-learning folder):
+python master-folder/ttt/tests/functional_tests.py
+
+Unit tests:
+(from master-folder):
+`python manage.py test`
 ```
 
-### To view in browser
+## To view in browser
 ```bash
 python manage.py runserver
 ```
@@ -34,14 +39,16 @@ Then start the server at localhost:8000
 * Pair programming
 
 ---
-## Technologies used
+
+## Technologies used
 
 * [Python 3.6.1](https://www.python.org/) as the main back-end language
 * [Django](https://www.djangoproject.com/) for the framework
-* [Githup](https://github.com/pmuldoon86/machine-learning/) for branches/teamwork
+* [Github](https://github.com/pmuldoon86/machine-learning/) for branches/teamwork
 * Git for version managing
 
-## Images
+
+## Images
 
 ## User Stories
 As a robot
