@@ -9,13 +9,7 @@ tree = {}
 def create_tree(states):
     tree['0'] = states[:]
 
-
-def grow_tree(tree):
-    for k, v in sorted(tree.items()):
-        indeces = int(k) + 1
-        print(k + str(v))
-
-def grow(tree, start, states):
+def grow_tree(tree, start, states):
     for i in range(0, len(states)):
         new_states = states[:]
         key = start + str(new_states.pop(i)[0])
