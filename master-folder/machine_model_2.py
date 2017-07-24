@@ -1,0 +1,35 @@
+import copy
+
+states = [[1, 0.0], [2, 0.0], [3, 0.0], [4, 0.0], [5, 0.0], [6, 0.0], [7, 0.0], [8, 0.0], [9, 0.0]]
+
+simple_states = [[1, 1], [2,1], [3, 1]]
+
+class MachinePlayer():
+
+    global states
+
+    def __init__(self):
+        self.tree = {}
+        self.states = states
+        self.counter = 0
+        self.start = '0'
+
+    def create_tree(self):
+        self.tree[self.start] = self.states[:]
+
+    def grow_tree(self, start, states):
+        tree = self.tree
+
+        for i in range(0, len(states)):
+            new_states = states[:]
+            key = start + str(new_states.pop(i)[0])
+            if len(new_states) > 0:
+                tree[key] = new_states
+            print(new_states)
+            self.grow_tree(key, new_states)
+
+        self.tree = tree
+
+
+    def play_game():
+        counter = 0
