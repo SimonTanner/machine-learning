@@ -13,6 +13,7 @@ class MachinePlayer():
         self.states = states
         self.counter = 0
         self.start = '0'
+        self.path = '0'
 
     def create_tree(self):
         self.tree[self.start] = self.states[:]
@@ -30,6 +31,15 @@ class MachinePlayer():
 
         self.tree = tree
 
+    def choose_option(self):
+        states = self.tree[self.path]
+        max_chance = max(states, key=lambda x: x[1])[1]
+        choices = []
+        for i in states:
+            if i[1] == max_chance:
+                choices.append(i[0])
 
-    def play_game():
-        counter = 0
+        choice = random.choice(choices)
+        self.path = self.path + str(choice)
+
+        return choice
