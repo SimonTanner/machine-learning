@@ -1,4 +1,4 @@
-from django.db import models
+#from django.db import models
 
 # Create your models here.
 
@@ -9,6 +9,7 @@ class TicTacToe():
 
         self.board = []
         self.create_board()
+        self.free_spaces = []
 
     def create_board(self):
         board = self.board
@@ -54,6 +55,17 @@ class TicTacToe():
     def receive_input(self, position, letter):
         r, c = position
         self.board[r][c] = letter
+        self.free_board_space()
+        print(self.free_spaces)
+
+    def free_board_space(self):
+        self.free_spaces = []
+        for row in range(0, len(self.board)):
+            for column in range(0, len(self.board)):
+                if self.board[row][column] != '.':
+                    free_int = row * 3 + column + 1
+                    self.free_spaces.append(free_int)
+
 
 
 def main():
