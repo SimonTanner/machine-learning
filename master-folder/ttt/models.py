@@ -8,8 +8,12 @@ class TicTacToe():
     def __init__(self):
 
         self.board = []
-        self.create_board()
         self.free_spaces = []
+        self.create_board()
+
+    def space_array_create(self):
+        for i in range(1,10):
+            self.free_spaces.append(i)
 
     def create_board(self):
         board = self.board
@@ -17,6 +21,8 @@ class TicTacToe():
             board.append([])
             for column in range(3):
                 board[row].append('.')
+
+        self.space_array_create()
 
     def print_board(self):
         for row in self.board:
@@ -55,16 +61,14 @@ class TicTacToe():
     def receive_input(self, position, letter):
         r, c = position
         self.board[r][c] = letter
-        self.free_board_space()
+        self.free_board_space(r,c)
         print(self.free_spaces)
 
-    def free_board_space(self):
-        self.free_spaces = []
-        for row in range(0, len(self.board)):
-            for column in range(0, len(self.board)):
-                if self.board[row][column] != '.':
-                    free_int = row * 3 + column + 1
-                    self.free_spaces.append(free_int)
+    #def index_to_num(self)
+
+    def free_board_space(self, row, column):
+        free_int = row + 1 + column * 3
+        self.free_spaces.remove(free_int)
 
 
 
