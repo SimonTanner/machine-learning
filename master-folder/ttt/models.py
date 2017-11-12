@@ -1,5 +1,17 @@
 from django.db import models
 
+import importlib.machinery
+
+import os, math
+
+#path = os.path.join(os.getcwd(), 'machine_model_2.py')
+
+path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../machine_model_2.py')
+
+mod = importlib.machinery.SourceFileLoader('machine_player', path)
+
+machine = mod.load_module('machine_player')
+
 # Create your models here.
 
 
@@ -59,16 +71,23 @@ class TicTacToe():
             return "win"
 
     def receive_input(self, position, letter):
-        r, c = position
+        if isinstance(position, list):
+            r, c = position
+        else:
+            r, c = self.int_to_position(position)
+
         self.board[r][c] = letter
         self.free_board_space(r,c)
-        print(self.free_spaces)
 
-    #def index_to_num(self)
 
     def free_board_space(self, row, column):
-        free_int = row + 1 + column * 3
+        free_int = row * 3 + 1 + column
         self.free_spaces.remove(free_int)
+
+    def int_to_position(self, num):
+        row = math.floor((num - 1) / 3)
+        column = num - row * 3 - 1
+        return [row, column]
 
 
 
@@ -84,15 +103,20 @@ def whose_go(num, player_1, player_2):
 
     return(num, player, symbol)
 
+def pos_to_list(position):
+    position = list(map(lambda a: int(a), position))
+
+    return position
+
 def check_board(position, game, player):
     while True:
-        position = list(map(lambda a: int(a), position))
+        position = pos_to_list(position)
 
         if game.board[position[0]][position[1]] == ".":
             break
         else:
             position = input(str(player) + " enter another position: ").split(" ")
-            position = list(map(lambda a: int(a), position))
+            position = pos_to_list(position)
     return(position)
 
 
@@ -100,17 +124,30 @@ def main():
     new_board = TicTacToe()
     new_board.print_board()
     player_1 = input("Player 1 please enter your name: ")
-    player_2 = input("Player 2 please enter your name: ")
+    machine_or_man = input("Would you like to play another human of play a machine?? H/M")
+    if machine_or_man == "H":
+        player_2 = input("Player 2 please enter your name: ")
+    else:
+        player_2 = "Machine"
+        machine_player = machine.MachinePlayer()
+
     num = 1
 
     while True:
         num, player, symbol = whose_go(num, player_1, player_2)
-        position = input(str(player) + " enter a position: ").split(" ")
-        position = check_board(position, new_board, player)
+        if player == "Machine":
+            position = machine_player.choose_option(new_board.free_spaces)
+
+
+        else:
+            position = input(str(player) + " enter a position: ").split(" ")
+            position = check_board(position, new_board, player)
         new_board.receive_input(position, symbol)
         new_board.print_board()
+
         if new_board.win_check(symbol) == "win":
             print(str(player) + " you've won!!!")
+
             if input("Play again? Enter y for yes: ") == "y":
                 main()
             else:

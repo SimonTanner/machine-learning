@@ -14,6 +14,8 @@ class MachinePlayer():
         self.counter = 0
         self.start = '0'
         self.path = '0'
+        self.create_tree()
+        self.grow_tree(self.start, self.states)
 
     def create_tree(self):
         self.tree[self.start] = self.states[:]
