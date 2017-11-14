@@ -30,7 +30,7 @@ class MachinePlayer():
             key = start + str(new_states.pop(i)[0])
             if len(new_states) > 0:
                 tree[key] = copy.deepcopy(new_states)
-            #print(new_states)
+                
             self.grow_tree(key, new_states)
 
         self.tree = tree
@@ -58,11 +58,8 @@ class MachinePlayer():
         for i in range(0, len(self.path)-1):
             index = int(i)
             choice = int(self.path[index + 1])
-            print(choice)
             index_2 = list(map(lambda x: x[0], self.tree[self.path[0:(index + 1)]])).index(choice)
-            print(index_2)
             branch = (self.tree[self.path[0:(index + 1)]])
-            print(branch[index_2])
             self.tree[self.path[0:(index + 1)]][index_2][1] = 1.0 + self.tree[self.path[0:(index + 1)]][index_2][1]
             total = sum(list(map(lambda x: x[1], self.tree[self.path[0:(index + 1)]])))
 
