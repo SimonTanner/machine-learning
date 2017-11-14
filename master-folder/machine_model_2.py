@@ -1,8 +1,10 @@
 import copy, random
 
 states = [[1, 0.0], [2, 0.0], [3, 0.0], [4, 0.0], [5, 0.0], [6, 0.0], [7, 0.0], [8, 0.0], [9, 0.0]]
+options = []
 
-simple_states = [[1, 1], [2,1], [3, 1]]
+for i in range(1, 10):
+    options.append(i)
 
 class MachinePlayer():
 
@@ -27,7 +29,7 @@ class MachinePlayer():
             new_states = states[:]
             key = start + str(new_states.pop(i)[0])
             if len(new_states) > 0:
-                tree[key] = new_states
+                tree[key] = copy.deepcopy(new_states)
             #print(new_states)
             self.grow_tree(key, new_states)
 
@@ -35,6 +37,8 @@ class MachinePlayer():
 
     def choose_option(self, options):
         states = self.tree[self.path]
+        state_options = list(map(lambda x: x[0], states))
+        states = [i for i in states if i[0] in options]
         max_chance = max(states, key=lambda x: x[1])[1]
         choices = []
         for i in states:
@@ -49,3 +53,21 @@ class MachinePlayer():
         self.path = self.path + str(choice)
 
         return choice
+
+    def machine_win(self):
+        for i in range(0, len(self.path)-1):
+            index = int(i)
+            choice = int(self.path[index + 1])
+            print(choice)
+            index_2 = list(map(lambda x: x[0], self.tree[self.path[0:(index + 1)]])).index(choice)
+            print(index_2)
+            branch = (self.tree[self.path[0:(index + 1)]])
+            print(branch[index_2])
+            self.tree[self.path[0:(index + 1)]][index_2][1] = 1.0 + self.tree[self.path[0:(index + 1)]][index_2][1]
+            total = sum(list(map(lambda x: x[1], self.tree[self.path[0:(index + 1)]])))
+
+            for v in branch:
+                v[1] = v[1] / total
+
+        self.path = '0'
+            #map(lambda x: [x[1] = x[1] / total], self.tree[self.path[0:(index + 1)]])
