@@ -1,6 +1,5 @@
-import copy, random
+import copy, random, json, os
 
-states = [[1, 0.0], [2, 0.0], [3, 0.0], [4, 0.0], [5, 0.0], [6, 0.0], [7, 0.0], [8, 0.0], [9, 0.0]]
 options = []
 
 for i in range(1, 10):
@@ -11,13 +10,25 @@ class MachinePlayer():
     global states
 
     def __init__(self):
-        self.tree = {}
-        self.states = states
+        self.states = [[1, 0.0], [2, 0.0], [3, 0.0], [4, 0.0], [5, 0.0], [6, 0.0], [7, 0.0], [8, 0.0], [9, 0.0]]
         self.counter = 0
         self.start = '0'
         self.path = '0'
-        self.create_tree()
-        self.grow_tree(self.start, self.states)
+        self.dir_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../data/tree_data.json')
+        self.create_data()
+
+
+    def create_data(self):
+        if os.path.isfile(self.dir_path):
+            with open(self.dir_path, 'r') as data:
+                tree = json.load(data)
+                self.tree = json.loads(tree)
+                data.close()
+        else:
+            self.tree = {}
+            self.create_tree()
+            self.grow_tree(self.start, self.states)
+
 
     def create_tree(self):
         self.tree[self.start] = self.states[:]
@@ -30,7 +41,7 @@ class MachinePlayer():
             key = start + str(new_states.pop(i)[0])
             if len(new_states) > 0:
                 tree[key] = copy.deepcopy(new_states)
-                
+
             self.grow_tree(key, new_states)
 
         self.tree = tree
@@ -67,4 +78,9 @@ class MachinePlayer():
                 v[1] = v[1] / total
 
         self.path = '0'
-            #map(lambda x: [x[1] = x[1] / total], self.tree[self.path[0:(index + 1)]])
+
+    def close_tree_data(self):
+        with open(self.dir_path, 'w') as data:
+            tree = json.dumps(self.tree)
+            json.dump(tree, data)
+            data.close()

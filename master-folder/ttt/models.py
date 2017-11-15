@@ -1,12 +1,8 @@
 from django.db import models
 
-import importlib.machinery
+import importlib.machinery, os, math
 
-import os, math
-
-#path = os.path.join(os.getcwd(), 'machine_model_2.py')
-
-path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../machine_model_2.py')
+path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'lib/machine_model.py')
 
 mod = importlib.machinery.SourceFileLoader('machine_player', path)
 
@@ -147,6 +143,9 @@ def main():
 
         if new_board.win_check(symbol) == "win":
             print(str(player) + " you've won!!!")
+            if player == 'Machine':
+                machine_player.machine_win()
+                machine_player.close_tree_data()
 
             if input("Play again? Enter y for yes: ") == "y":
                 main()
