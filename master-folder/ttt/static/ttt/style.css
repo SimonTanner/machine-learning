@@ -99,3 +99,8 @@ nav li a {
   padding: 2px 12px;
   cursor: pointer;
 }
+
+.square {
+  width:80px;
+  height:80px;
+}
