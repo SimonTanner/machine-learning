@@ -10,7 +10,7 @@ class MachinePlayer():
     global states
 
     def __init__(self):
-        self.states = [[1, 0.0], [2, 0.0], [3, 0.0], [4, 0.0], [5, 0.0], [6, 0.0], [7, 0.0], [8, 0.0], [9, 0.0]]
+        self.states = [[1, 1.0 / 9.0], [2, 1.0 / 9.0], [3, 1.0 / 9.0], [4, 1.0 / 9.0], [5, 1.0 / 9.0], [6, 1.0 / 9.0], [7, 1.0 / 9.0], [8, 1.0 / 9.0], [9, 1.0 / 9.0]]
         self.counter = 0
         self.start = '0'
         self.path = '0'
@@ -53,7 +53,7 @@ class MachinePlayer():
         max_chance = max(states, key=lambda x: x[1])[1]
         choices = []
         for i in states:
-            if i[1] == max_chance:
+            if i[1] / max_chance < 10:
                 try:
                     options.index(i[0])
                     choices.append(i[0])
@@ -71,7 +71,7 @@ class MachinePlayer():
             choice = int(self.path[index + 1])
             index_2 = list(map(lambda x: x[0], self.tree[self.path[0:(index + 1)]])).index(choice)
             branch = (self.tree[self.path[0:(index + 1)]])
-            self.tree[self.path[0:(index + 1)]][index_2][1] = 1.0 + self.tree[self.path[0:(index + 1)]][index_2][1]
+            self.tree[self.path[0:(index + 1)]][index_2][1] = 1.0 / (len(self.path) - i) + self.tree[self.path[0:(index + 1)]][index_2][1]
             total = sum(list(map(lambda x: x[1], self.tree[self.path[0:(index + 1)]])))
 
             for v in branch:

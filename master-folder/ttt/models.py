@@ -116,6 +116,34 @@ def check_board(position, game, player):
             position = pos_to_list(position)
     return(position)
 
+def end_of_game(player, message, win, machine_player):
+    print(str(player) + message)
+    if machine_player != False:
+        if player == 'Machine' and win == True:
+            machine_player.machine_win()
+
+        machine_player.close_tree_data()
+
+    if input("Play again? Enter y for yes: ") == "y":
+        main()
+
+
+def win_lose_draw(player, num, board, symbol, machine_player=False):
+    if board.win_check(symbol) == "win":
+        message = " you've WON!!!"
+        end_of_game(player, message, True, machine_player)
+        game_over = True
+
+    elif num == 10:
+        message = " no one won :( it's a draw"
+        end_of_game(player, message, False, machine_player)
+        game_over = True
+
+    else:
+        game_over = False
+
+    return(game_over)
+
 
 def main():
     new_board = TicTacToe()
@@ -124,6 +152,7 @@ def main():
     machine_or_man = input("Would you like to play another human of play a machine?? H/M")
     if machine_or_man == "H":
         player_2 = input("Player 2 please enter your name: ")
+        machine_player = False
     else:
         player_2 = "Machine"
         machine_player = machine.MachinePlayer()
@@ -142,16 +171,13 @@ def main():
         new_board.receive_input(position, symbol)
         new_board.print_board()
 
-        if new_board.win_check(symbol) == "win":
-            print(str(player) + " you've won!!!")
-            if player == 'Machine':
-                machine_player.machine_win()
-                machine_player.close_tree_data()
+        print(num)
 
-            if input("Play again? Enter y for yes: ") == "y":
-                main()
-            else:
-                break
+        game_over = win_lose_draw(player, num, new_board, symbol, machine_player)
+        if game_over == False:
+            continue
+        elif game_over == True:
+            break
 
     quit()
 
