@@ -14,6 +14,7 @@ class MachinePlayer():
         self.counter = 0
         self.start = '0'
         self.path = '0'
+        self.options = list(range(1, 10))
         self.dir_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../data/tree_data.json')
         self.create_data()
 
@@ -47,6 +48,15 @@ class MachinePlayer():
         self.tree = tree
 
     def choose_option(self, options):
+        if 10 - len(self.path) != len(options):
+            #path = list(self.path)
+            #path = [int(i) for i in path]
+            path = [i for i in self.options if i not in options]
+            path = path[0]
+            self.path += str(path)
+            print("Path = " + str(path))
+            self.options.remove(path)
+
         states = self.tree[self.path]
         state_options = list(map(lambda x: x[0], states))
         states = [i for i in states if i[0] in options]
@@ -61,6 +71,7 @@ class MachinePlayer():
                     continue
 
         choice = random.choice(choices)
+        self.options.remove(choice)
         self.path = self.path + str(choice)
 
         return choice
