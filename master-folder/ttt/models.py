@@ -1,7 +1,7 @@
 
 from django.db import models
 
-import importlib.machinery, os, math
+import importlib.machinery, os, math, random
 
 path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'lib/machine_model.py')
 
@@ -88,13 +88,27 @@ class TicTacToe():
 
 
 
-def whose_go(num, player_1, player_2):
-    if num % 2 != 0:
-        player = player_1
-        symbol = "X"
+def heads_or_tails():
+    choices = ["heads", "tails"]
+    coin = random.choice(choices)
+    return coin
+
+def whose_go(num, player_1, player_2, coin):
+
+    if coin == "heads":
+        if num % 2 != 0:
+            player = player_1
+            symbol = "X"
+        else:
+            player = player_2
+            symbol = "0"
     else:
-        player = player_2
-        symbol = "0"
+        if num % 2 != 0:
+            player = player_2
+            symbol = "X"
+        else:
+            player = player_1
+            symbol = "0"
 
     num += 1
 
@@ -119,10 +133,7 @@ def check_board(position, game, player):
 def end_of_game(player, message, win, machine_player):
     print(str(player) + message)
     if machine_player != False:
-        if player == 'Machine' and win == True:
-            machine_player.machine_win()
-
-        machine_player.close_tree_data()
+        machine_player.machine_win()
 
     if input("Play again? Enter y for yes: ") == "y":
         main()
@@ -158,9 +169,11 @@ def main():
         machine_player = machine.MachinePlayer()
 
     num = 1
+    coin_toss = heads_or_tails()
+    print(coin_toss)
 
     while True:
-        num, player, symbol = whose_go(num, player_1, player_2)
+        num, player, symbol = whose_go(num, player_1, player_2, coin_toss)
         if player == "Machine":
             position = machine_player.choose_option(new_board.free_spaces)
 

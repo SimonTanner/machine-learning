@@ -5,4 +5,6 @@ def load_tree_data():
         data = json.load(f)
         data = json.loads(data)
 
+    f.close()
+
     return(data)

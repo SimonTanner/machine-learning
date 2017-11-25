@@ -76,6 +76,12 @@ class MachinePlayer():
 
         return choice
 
+    def close_tree_data(self):
+        with open(self.dir_path, 'w') as data:
+            tree = json.dumps(self.tree)
+            json.dump(tree, data)
+            data.close()
+
     def machine_win(self):
         for i in range(0, len(self.path)-1):
             index = int(i)
@@ -88,10 +94,5 @@ class MachinePlayer():
             for v in branch:
                 v[1] = v[1] / total
 
+        self.close_tree_data()
         self.path = '0'
-
-    def close_tree_data(self):
-        with open(self.dir_path, 'w') as data:
-            tree = json.dumps(self.tree)
-            json.dump(tree, data)
-            data.close()
