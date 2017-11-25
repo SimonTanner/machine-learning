@@ -47,15 +47,15 @@ class MachinePlayer():
 
         self.tree = tree
 
-    def choose_option(self, options):
+    def check_options(self, options):
         if 10 - len(self.path) != len(options):
-            #path = list(self.path)
-            #path = [int(i) for i in path]
             path = [i for i in self.options if i not in options]
             path = path[0]
             self.path += str(path)
-            print("Path = " + str(path))
             self.options.remove(path)
+
+    def choose_option(self, options):
+        self.check_options(options)
 
         states = self.tree[self.path]
         state_options = list(map(lambda x: x[0], states))
