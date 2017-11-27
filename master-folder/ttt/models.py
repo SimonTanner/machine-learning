@@ -123,6 +123,3 @@ def main():
             break
 
     quit()
-
-
-main()
