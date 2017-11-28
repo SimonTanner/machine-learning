@@ -11,9 +11,10 @@ class NewGametest(unittest.TestCase):
     def tearDown(self):
         self.browser.quit()
 
-    def test_game(self):
+    def test_home_page(self):
         self.browser.get('http://localhost:8000')
-        self.assertIn('TTT', self.browser.title)
+        self.assertIn('ML-TTT', self.browser.title)
+        
 
     def test_links(self):
         self.browser.get('http://localhost:8000')
