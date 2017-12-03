@@ -25,6 +25,12 @@ class NewGametest(unittest.TestCase):
         self.assertEqual(self.browser.current_url, 'https://github.com/simontanner/machine-learning')
         #button = self.browser.find_element_by_name("Play ML TTT")
 
+    def test_button(self):
+        self.browser.get('http://localhost:8000')
+        button = self.browser.find_element_by_name("playGame")
+        button.click()
+        self.assertIn('Play the Machine', self.browser.title)
+
 
 if __name__ == '__main__':
     unittest.main(warnings='ignore')
