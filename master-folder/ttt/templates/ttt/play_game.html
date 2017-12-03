@@ -11,7 +11,22 @@
 <nav>
   <ul>
     <li>
-      Play the Machine
+      <center>
+        Play the Machine
+      </center>
     </li>
   </ul>
 </nav>
+
+<body>
+  <center>
+    <form id="submitName" action='/newgame/' method='POST'>
+      <br>
+      Please enter your name:
+      </br>
+      <input placeholder="Your Name" name="player_name"/>
+      {% csrf_token %}
+      <input type="submit" value="Enter"/>
+    </form>
+  </center>
+</body>

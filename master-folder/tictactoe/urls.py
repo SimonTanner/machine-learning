@@ -20,6 +20,7 @@ from ttt import views
 
 urlpatterns = [
     url(r'^$', views.index, name = 'index'),
-    url(r'^newgame/', views.play_game, name = 'play_game'),
+    url(r'^playgame/', views.play_game, name = 'play_game'),
+    url(r'^newgame/', views.new_game, name ='new_game'),
     url(r'^admin/', admin.site.urls),
 ]

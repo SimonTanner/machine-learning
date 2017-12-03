@@ -1,4 +1,6 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import time
 import unittest
 from splinter import Browser
 
@@ -23,7 +25,6 @@ class NewGametest(unittest.TestCase):
         image = self.browser.find_element_by_xpath("//img[@title='github']")
         image.click()
         self.assertEqual(self.browser.current_url, 'https://github.com/simontanner/machine-learning')
-        #button = self.browser.find_element_by_name("Play ML TTT")
 
     def test_play_button(self):
         self.browser.get('http://localhost:8000')
@@ -33,11 +34,12 @@ class NewGametest(unittest.TestCase):
         self.assertEqual('Play the Machine', header)
 
     def test_can_enter_their_name(self):
-        self.browser.get('http://localhost:8000/newgame')
-        submit_name = self.browser.find_element_by_tag_name("submitName")
+        self.browser.get('http://localhost:8000/playgame')
+        submit_name = self.browser.find_element_by_name("player_name")
         submit_name.send_keys('Simon')
+        time.sleep(5)
         submit_name.send_keys(Keys.ENTER)
-        time.sleep(10)
+        time.sleep(5)
         header = self.browser.find_element_by_tag_name('li').text
         self.assertEqual('Simon vs. Machine', header)
 

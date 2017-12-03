@@ -7,3 +7,7 @@ def index(request):
 
 def play_game(request):
     return render(request, 'ttt/play_game.html')
+
+def new_game(request):
+    return render(request, 'ttt/new_game.html', {
+        'new_player' : request.POST.get('player_name', '')})
