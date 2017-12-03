@@ -6,7 +6,7 @@ html {
 }
 
 nav {
-  background-color: #b35757;
+  background-color: #F4F115;
   height: 60px;
   width: 100%;
 }
@@ -19,8 +19,9 @@ nav ul {
 
 nav ul li {
   font-weight: bold;
-  float: left;
-  padding: 12px 8px 12px 8px;
+  font-size: large;
+  float: center;
+  padding: 12px 12px 12px 12px;
   line-height: 40px;
 }
 
@@ -76,8 +77,8 @@ nav li a {
   font-size: 12px;
   text-align: center;
   font-family: 'Neue Helvetica', Helvetica;
-  background-color: #b35757;
-  height: 60px;
+  background-color: #F4F115;
+  height: 40px;
   width: 100%;
 }
 
