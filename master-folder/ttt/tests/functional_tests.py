@@ -29,7 +29,8 @@ class NewGametest(unittest.TestCase):
         self.browser.get('http://localhost:8000')
         button = self.browser.find_element_by_name("playGame")
         button.click()
-        self.assertIn('Play the Machine', self.browser.title)
+        header = self.browser.find_element_by_tage_name('li').text
+        self.assertEqual('Play the Machine', header)
 
 
 if __name__ == '__main__':
