@@ -29,7 +29,7 @@ class NewGametest(unittest.TestCase):
         self.browser.get('http://localhost:8000')
         button = self.browser.find_element_by_name("playGame")
         button.click()
-        header = self.browser.find_element_by_tage_name('li').text
+        header = self.browser.find_element_by_tag_name('li').text
         self.assertEqual('Play the Machine', header)
 
 
