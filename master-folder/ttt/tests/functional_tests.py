@@ -5,6 +5,12 @@ import unittest
 from splinter import Browser
 
 
+def load_page(browser, page=''):
+    host_page = 'http://localhost:8000'
+    return(browser.get(host_page+page))
+
+
+
 class NewGametest(unittest.TestCase):
 
     def setUp(self):
@@ -14,30 +20,30 @@ class NewGametest(unittest.TestCase):
         self.browser.quit()
 
     def test_home_page(self):
-        self.browser.get('http://localhost:8000')
+        load_page(self.browser)
         self.assertIn('ML-TTT', self.browser.title)
         header = self.browser.find_element_by_tag_name('li').text
         self.assertEqual("Welcome to TicTacToe Man vs. Machine!", header)
 
 
     def test_links(self):
-        self.browser.get('http://localhost:8000')
+        load_page(self.browser)
         image = self.browser.find_element_by_xpath("//img[@title='github']")
         image.click()
+        time.sleep(1)
         self.assertEqual(self.browser.current_url, 'https://github.com/simontanner/machine-learning')
 
     def test_play_button(self):
-        self.browser.get('http://localhost:8000')
+        load_page(self.browser)
         button = self.browser.find_element_by_name("playGame")
         button.click()
         header = self.browser.find_element_by_tag_name('li').text
         self.assertEqual('Play the Machine', header)
 
     def test_can_enter_their_name(self):
-        self.browser.get('http://localhost:8000/playgame')
+        load_page(self.browser, '/playgame')
         submit_name = self.browser.find_element_by_name("player_name")
         submit_name.send_keys('Simon')
-        time.sleep(5)
         submit_name.send_keys(Keys.ENTER)
         time.sleep(5)
         header = self.browser.find_element_by_tag_name('li').text

@@ -73,6 +73,7 @@ nav li a {
 
 .footer {
   padding: 20px 0px;
+  vertical-align: bottom;
   font-weight: bold;
   font-size: 12px;
   text-align: center;
@@ -104,4 +105,17 @@ nav li a {
 .square {
   width:80px;
   height:80px;
+}
+
+.spanFormat
+{
+  text-align: center;
+  display: table-cell;
+  min-width: 10px;
+  padding-right: 5px;
+}
+
+.button2 {
+color: #F4F115;
+
 }

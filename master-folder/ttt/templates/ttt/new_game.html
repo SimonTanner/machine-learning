@@ -16,3 +16,58 @@
     </li>
   </ul>
 </nav>
+
+<body>
+  <center>
+    <br/>
+    <table>
+    <tr>
+      <td>
+        <form action="/newgame/" method="post" >
+          <input type="hidden" name="choice" value="1">
+          <input type="submit" value=""/>
+          {% csrf_token %}
+        </form>
+      </td>
+      <td>
+        <form action="/newgame/" method="post">
+          <input type="hidden" name="choice" value="2"/>
+          <input type="submit" value=""/>
+          {% csrf_token %}
+        </form>
+      </td>
+      <td>
+        <form action="/newgame/" method="post">
+          <input type="hidden" name="choice" value="3"/>
+          <input type="submit" value=""/>
+          {% csrf_token %}
+        </form>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <form action="/newgame/" method="post" class="button2">
+          <input type="hidden" name="choice" value="4">
+          <input type="submit" value=""/>
+          {% csrf_token %}
+        </form>
+      </td>
+      <td>
+        <form action="/newgame/" method="post">
+          <input type="hidden" name="choice" value="5"/>
+          <input type="submit" value={{ choice_1_1 }} />
+          {% csrf_token %}
+        </form>
+      </td>
+      <td>
+        <form action="/newgame/" method="post">
+          <input type="hidden" name="choice" value="6"/>
+          <input type="submit" value={{ choice_1_2 }} />
+          {% csrf_token %}
+        </form>
+        </td>
+      </tr>
+  </table>
+    Choice = {{ choice }}
+  </center>
+</body>
