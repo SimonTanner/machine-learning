@@ -14,7 +14,7 @@ class GameTest(unittest.TestCase):
     def test_a_board_is_created_when_a_new_game_starts(self):
         self.game = Game('Michelle')
         board = self.game.board
-        self.assertIsInstance(TicTacToe, board)
+        self.assertIsInstance(board, TicTacToe)
 
 
 if __name__ == '__main__':
