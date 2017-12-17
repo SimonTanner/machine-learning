@@ -13,5 +13,5 @@ class HomePageTest(TestCase):
         request = HttpRequest()
         response = index(request)
         html = response.content.decode('utf8')
-        self.assertIn('<title> TTT </title>', html)
+        self.assertIn('<title> ML-TTT </title>', html)
         self.assertIn('<nav>', html)
