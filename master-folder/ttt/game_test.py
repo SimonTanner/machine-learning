@@ -35,6 +35,12 @@ class GameTest(unittest.TestCase):
         self.game.choose_space('1')
         self.assertEqual(self.game.board.board['1'], 'X')
 
+    def test_once_a_player_has_taken_thier_turn_the_other_player_goes_next(self):
+        self.game = Game('Helen', 'X')
+        previous_turn = self.game.whose_turn
+        self.game.take_turn('4')
+        current_turn = self.game.whose_turn
+        self.assertNotEqual(previous_turn,current_turn)
 
 
 
