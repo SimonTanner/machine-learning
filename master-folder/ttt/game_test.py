@@ -24,7 +24,7 @@ class GameTest(unittest.TestCase):
 
     def test_a_game_chooses_a_player_at_random_to_go_first(self):
         first_turns = []
-        test_count = test_count
+        test_count = 10
         for i in range(test_count):
             self.game = Game('Helen')
             first_turns.append(self.game.whose_turn)
