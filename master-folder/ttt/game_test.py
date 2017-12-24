@@ -31,6 +31,10 @@ class GameTest(unittest.TestCase):
 
         self.assertLess(first_turns.count('Helen'), test_count)
 
+    def test_a_player_can_choose_a_space(self):
+        self.game = Game('Helen', 'X')
+        self.game.choose_space('1')
+        self.assertEqual(self.game.board.board['1'], 'X')
 
 
 if __name__ == '__main__':
