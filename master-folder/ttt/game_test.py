@@ -1,6 +1,7 @@
 import unittest
 from lib.game import Game
 from lib.ttt_board import TicTacToe
+from lib.machine_model import MachinePlayer
 
 class GameTest(unittest.TestCase):
 
@@ -15,6 +16,11 @@ class GameTest(unittest.TestCase):
         self.game = Game('Michelle')
         board = self.game.board
         self.assertIsInstance(board, TicTacToe)
+
+    def test_a_machine_player_instance_is_created_when_a_game_starts(self):
+        self.game = Game('Helen')
+        player_2 = self.game.machine_player
+        self.assertIsInstance(player_2, MachinePlayer)
 
 
 if __name__ == '__main__':
