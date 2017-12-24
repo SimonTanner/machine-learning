@@ -21,7 +21,7 @@ class TTTTest(unittest.TestCase):
 
     def test_TTT_cannot_enter_the_same_space_more_than_once(self):
         self.ttt.choose_space('6', 'X')
-        self.assertEqual(self.ttt.choose_space('6', 'X'), 'Error')
+        self.assertEqual(self.ttt.choose_space('6', 'X'), True)
 
 
 if __name__ == '__main__':

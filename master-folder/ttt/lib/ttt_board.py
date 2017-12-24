@@ -12,4 +12,10 @@ class TicTacToe():
             self.board[str(i)] = ' '
 
     def choose_space(self, space, character):
-        self.board[space] = character
+        space_taken = False
+        if self.board[space] == ' ':
+            self.board[space] = character
+        else:
+            space_taken = True
+
+        return space_taken
