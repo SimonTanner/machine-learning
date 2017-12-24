@@ -10,7 +10,8 @@ class Game():
         machine_player_char = chars[x_or_o]
         self.board = TicTacToe()
         self.machine_player = MachinePlayer()
-        self.players = {player_name: x_or_o, 'machine_player':machine_player_char}
+        self.players = {player_name : x_or_o, 'machine_player' : machine_player_char}
+        self.player_switch = {player_name : 'machine_player', 'machine_player' : player_name}
         self.who_goes_first()
 
     def who_goes_first(self):
@@ -18,3 +19,7 @@ class Game():
 
     def choose_space(self, choice):
         self.board.choose_space(str(choice), self.players[self.whose_turn])
+
+    def take_turn(self, choice):
+        self.choose_space(choice)
+        self.whose_turn = self.player_switch[self.whose_turn]

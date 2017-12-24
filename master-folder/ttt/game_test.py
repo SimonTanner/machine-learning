@@ -32,6 +32,7 @@ class GameTest(unittest.TestCase):
 
     def test_a_player_can_choose_a_space(self):
         self.game = Game('Helen', 'X')
+        self.game.whose_turn = 'Helen'
         self.game.choose_space('1')
         self.assertEqual(self.game.board.board['1'], 'X')
 
