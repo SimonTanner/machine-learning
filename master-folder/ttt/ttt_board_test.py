@@ -19,6 +19,10 @@ class TTTTest(unittest.TestCase):
         self.ttt.choose_space('6', 'X')
         self.assertLessEqual({'6':'X'}.items(), self.ttt.board.items())
 
+    def test_TTT_cannot_enter_the_same_space_more_than_once(self):
+        self.ttt.choose_space('6', 'X')
+        self.assertEqual(self.ttt.choose_space('6', 'X'), 'Error')
+
 
 if __name__ == '__main__':
     unittest.main()
