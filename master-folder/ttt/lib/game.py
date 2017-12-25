@@ -20,10 +20,13 @@ class Game():
     def choose_space(self, choice):
         return self.board.choose_space(str(choice), self.players[self.whose_turn])
 
-    def take_turn(self, choice):
-        if self.choose_space(choice):
+    def take_turn(self, choice=None):
+        msg = None
+        if self.whose_turn == 'machine_player':
+            choice = self.machine_player.choose_option(self.board.free_spaces)
+            self.choose_space(choice)
+        elif self.choose_space(choice):
             msg = 'Sorry that space is already taken'
         else:
             self.whose_turn = self.player_switch[self.whose_turn]
-            msg = None
         return msg
