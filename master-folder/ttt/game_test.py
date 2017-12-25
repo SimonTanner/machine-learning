@@ -59,5 +59,6 @@ class GameTest(unittest.TestCase):
         self.assertNotEqual(test_board, self.game.board.free_spaces)
 
 
+
 if __name__ == '__main__':
     unittest.main()
