@@ -43,6 +43,15 @@ class GameTest(unittest.TestCase):
         current_turn = self.game.whose_turn
         self.assertNotEqual(previous_turn,current_turn)
 
+    def test_if_a_player_tries_to_choose_a_space_already_taken_game_gives_a_msg_to_choose_again(self):
+        self.game = Game('Pete')
+        self.game.whose_turn = 'Pete'
+        self.game.take_turn('4')
+        self.game.whose_turn = 'Pete'
+        message = self.game.take_turn('4')
+        self.assertEqual(message, 'Sorry that space is already taken')
+
+
 
 
 if __name__ == '__main__':
