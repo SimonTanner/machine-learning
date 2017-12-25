@@ -36,7 +36,7 @@ class GameTest(unittest.TestCase):
         self.game.choose_space('1')
         self.assertEqual(self.game.board.board['1'], 'X')
 
-    def test_once_a_player_has_taken_thier_turn_the_other_player_goes_next(self):
+    def test_once_a_player_has_taken_their_turn_the_other_player_goes_next(self):
         self.game = Game('Helen', 'X')
         previous_turn = self.game.whose_turn
         self.game.take_turn('4')
@@ -51,7 +51,12 @@ class GameTest(unittest.TestCase):
         message = self.game.take_turn('4')
         self.assertEqual(message, 'Sorry that space is already taken')
 
-
+    def test_the_machine_player_can_take_a_turn(self):
+        self.game = Game('Pete')
+        test_board = list(range(1, 10))
+        self.game.whose_turn = 'machine_player'
+        self.game.take_turn()
+        self.assertNotEqual(test_board, self.game.board.free_spaces)
 
 
 if __name__ == '__main__':
