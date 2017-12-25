@@ -18,8 +18,12 @@ class Game():
         self.whose_turn = random.choice(list(self.players.keys()))
 
     def choose_space(self, choice):
-        self.board.choose_space(str(choice), self.players[self.whose_turn])
+        return self.board.choose_space(str(choice), self.players[self.whose_turn])
 
     def take_turn(self, choice):
-        self.choose_space(choice)
-        self.whose_turn = self.player_switch[self.whose_turn]
+        if self.choose_space(choice):
+            msg = 'Sorry that space is already taken'
+        else:
+            self.whose_turn = self.player_switch[self.whose_turn]
+            msg = None
+        return msg
