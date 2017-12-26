@@ -17,7 +17,7 @@ class TicTacToe():
     def check_board(self):
         board = self.board
         for i in range(1, 9, 3):
-            if board[str(i)] == board[str(i + 1)] == board[str(i + 2)]:
+            if board[str(i)] == board[str(i + 1)] == board[str(i + 1)] == board[str(i + 2)] != ' ':
                 self.win = True
 
     def choose_space(self, space, character):

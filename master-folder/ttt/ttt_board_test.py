@@ -27,8 +27,13 @@ class TTTTest(unittest.TestCase):
         self.ttt.choose_space('6', 'X')
         self.assertNotIn(6, self.ttt.free_spaces)
 
-    def test_board_checks_if_there_has_been_a_horizontal_win_(self):
+    def test_board_checks_if_there_has_been_a_horizontal_win(self):
         for i in range(1, 4):
+            self.ttt.choose_space(str(i), 'X')
+        self.assertEqual(self.ttt.win, True)
+
+    def test_board_checks_if_there_has_been_a_vertical_win(self):
+        for i in range(3, 9, 3):
             self.ttt.choose_space(str(i), 'X')
         self.assertEqual(self.ttt.win, True)
 
