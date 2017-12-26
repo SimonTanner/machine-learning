@@ -33,7 +33,7 @@ class TTTTest(unittest.TestCase):
         self.assertEqual(self.ttt.win, True)
 
     def test_board_checks_if_there_has_been_a_vertical_win(self):
-        for i in range(3, 9, 3):
+        for i in range(3, 10, 3):
             self.ttt.choose_space(str(i), 'X')
         self.assertEqual(self.ttt.win, True)
 
