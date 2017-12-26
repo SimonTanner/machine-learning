@@ -18,6 +18,8 @@ class TicTacToe():
         board = self.board
         if board['1'] == board['5'] == board['9'] != ' ':
             self.win = True
+        elif board['3'] == board['5'] == board['7'] != ' ':
+            self.win = True
         else:
             for i in range(1, 9, 3):
                 j = int((i + 2) / 3)
