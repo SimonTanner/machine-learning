@@ -42,6 +42,11 @@ class TTTTest(unittest.TestCase):
             self.ttt.choose_space(str(i), 'X')
         self.assertEqual(self.ttt.win, True)
 
+    def test_board_checks_if_there_has_been_a_diagonal_win_2(self):
+        for i in range(3, 8, 2):
+            self.ttt.choose_space(str(i), 'X')
+        self.assertEqual(self.ttt.win, True)
+
 
 if __name__ == '__main__':
     unittest.main()
