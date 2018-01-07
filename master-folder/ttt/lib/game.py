@@ -29,4 +29,8 @@ class Game():
             msg = 'Sorry that space is already taken'
         else:
             self.whose_turn = self.player_switch[self.whose_turn]
+        if self.board.win == True:
+            winner_char = self.board.winning_char
+            winner = [key for key, value in self.players.items() if value == winner_char][0]
+            msg = '%s won!!!' % str(winner)
         return msg
