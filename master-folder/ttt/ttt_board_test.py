@@ -47,6 +47,11 @@ class TTTTest(unittest.TestCase):
             self.ttt.choose_space(str(i), 'X')
         self.assertEqual(self.ttt.win, True)
 
+    def test_board_stores_the_winners_character(self):
+        for i in range(3, 8, 2):
+            self.ttt.choose_space(str(i), 'X')
+        self.assertEqual(self.ttt.winning_char, 'X')
+
 
 if __name__ == '__main__':
     unittest.main()
