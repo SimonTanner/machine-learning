@@ -6,6 +6,7 @@ class TicTacToe():
         self.board = {}
         self.free_spaces = []
         self.win = False
+        self.winning_char = None
         self.create_board()
 
 
@@ -17,16 +18,20 @@ class TicTacToe():
     def check_board(self):
         board = self.board
         if board['1'] == board['5'] == board['9'] != ' ':
-            self.win = True
+            self.board_win(board['5'])
         elif board['3'] == board['5'] == board['7'] != ' ':
-            self.win = True
+            self.board_win(board['5'])
         else:
             for i in range(1, 9, 3):
                 j = int((i + 2) / 3)
                 if board[str(i)] == board[str(i + 1)] == board[str(i + 2)] != ' ':
-                    self.win = True
+                    self.board_win(board[str(i)])
                 elif board[str(j)] == board[str(j + 3)] == board[str(j + 6)] != ' ':
-                    self.win = True
+                    self.board_win(board[str(j)])
+
+    def board_win(self, char):
+        self.win = True
+        self.winning_char = char
 
     def choose_space(self, space, character):
         space_taken = False
