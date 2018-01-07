@@ -38,6 +38,7 @@ class GameTest(unittest.TestCase):
 
     def test_once_a_player_has_taken_their_turn_the_other_player_goes_next(self):
         self.game = Game('Helen', 'X')
+        self.game.whose_turn = 'Helen'
         previous_turn = self.game.whose_turn
         self.game.take_turn('4')
         current_turn = self.game.whose_turn
@@ -57,6 +58,17 @@ class GameTest(unittest.TestCase):
         self.game.whose_turn = 'machine_player'
         self.game.take_turn()
         self.assertNotEqual(test_board, self.game.board.free_spaces)
+
+    def test_when_a_game_is_won_game_announces_who_won(self):
+        player = 'Mary'
+        self.game = Game(player)
+        for i in range(3):
+            self.game.whose_turn = player
+            message = self.game.take_turn(str(i + 1))
+
+        self.assertEqual(message, player + ' won!!!')
+
+
 
 
 
