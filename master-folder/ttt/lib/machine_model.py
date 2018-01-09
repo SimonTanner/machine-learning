@@ -82,7 +82,7 @@ class MachinePlayer():
             json.dump(tree, data)
             data.close()
 
-    def machine_win(self):
+    def game_won(self):
         for i in range(0, len(self.path)-1):
             index = int(i)
             choice = int(self.path[index + 1])

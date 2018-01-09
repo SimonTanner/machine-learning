@@ -20,6 +20,12 @@ class Game():
     def choose_space(self, choice):
         return self.board.choose_space(str(choice), self.players[self.whose_turn])
 
+    def win_check(self):
+        winner_char = self.board.winning_char
+        winner = [key for key, value in self.players.items() if value == winner_char][0]
+        msg = '%s won!!!' % str(winner)
+        return msg
+
     def take_turn(self, choice=None):
         msg = None
         if self.whose_turn == 'machine_player':
@@ -30,7 +36,6 @@ class Game():
         else:
             self.whose_turn = self.player_switch[self.whose_turn]
         if self.board.win == True:
-            winner_char = self.board.winning_char
-            winner = [key for key, value in self.players.items() if value == winner_char][0]
-            msg = '%s won!!!' % str(winner)
+            msg = self.win_check()
+            self.machine_player.game_won()
         return msg
