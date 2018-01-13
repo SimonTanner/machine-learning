@@ -1,10 +1,10 @@
-from lib.ttt_board import TicTacToe
-from lib.machine_model import MachinePlayer
+from ttt.lib.ttt_board import TicTacToe
+from ttt.lib.machine_model import MachinePlayer
 import random
 
 class Game():
 
-    def __init__(self, player_name, x_or_o='X'):
+    def __init__(self, player_name='Human', x_or_o='X'):
         chars = {'X':'0', '0':'X'}
         self.player_name = player_name
         machine_player_char = chars[x_or_o]
@@ -31,9 +31,11 @@ class Game():
         if self.whose_turn == 'machine_player':
             choice = self.machine_player.choose_option(self.board.free_spaces)
             self.choose_space(choice)
+            self.whose_turn = self.player_switch[self.whose_turn]
         elif self.choose_space(choice):
             msg = 'Sorry that space is already taken'
         else:
+            self.choose_space(choice)
             self.whose_turn = self.player_switch[self.whose_turn]
         if self.board.win == True:
             msg = self.win_check()
