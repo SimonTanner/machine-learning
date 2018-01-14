@@ -13,9 +13,21 @@ class Game():
         self.players = {player_name : x_or_o, 'machine_player' : machine_player_char}
         self.player_switch = {player_name : 'machine_player', 'machine_player' : player_name}
         self.who_goes_first()
+        self.create_render_data()
 
     def who_goes_first(self):
         self.whose_turn = random.choice(list(self.players.keys()))
+
+    def create_render_data(self, message='Play'):
+        self.render_data = {}
+        for i in range(1,10):
+            num = str(i)
+            self.render_data['choice_' + num] = self.board.board[num]
+        self.render_data['new_player'] = self.player_name
+        self.render_data['current_player'] = self.whose_turn
+        self.render_data['message'] = message
+
+
 
     def choose_space(self, choice):
         return self.board.choose_space(str(choice), self.players[self.whose_turn])
@@ -40,4 +52,6 @@ class Game():
         if self.board.win == True:
             msg = self.win_check()
             self.machine_player.game_won()
+        self.create_render_data(msg)
+        #self.render_data['message'] = msg
         return msg
